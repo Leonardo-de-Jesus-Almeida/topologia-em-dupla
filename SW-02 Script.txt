@@ -1,0 +1,27 @@
+enable
+configure terminal
+hostname ASw-2
+banner motd "ACESSO PERMITIDO APENAS PARA LUCAS LINDO!!!"
+ip domain-name 1rede.local
+crypto key generate rsa general-keys modulus 1024
+enable secret class
+service password-encryption
+ip default-gateway 10.10.11.1
+
+line console 0
+password cisco
+login 
+exit
+
+line vty 0 15
+password cisco
+login 
+transport input ssh
+exit
+
+interface vlan 1
+no shutdown
+ip address 10.10.11.100 255.255.255.0
+description INTERFACE DE GERENCIAMENTO
+END
+wr
